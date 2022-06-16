@@ -453,6 +453,7 @@ class GeneratorInterface:
 
     def __init__(self, cfg: MetaseqConfig):
         self.cfg = cfg
+        logger.info(cfg)
         if isinstance(self.cfg, Namespace):
             self.cfg = convert_namespace_to_omegaconf(self.cfg)
 
@@ -472,7 +473,7 @@ class GeneratorInterface:
 
         def _build_model(cfg, task):
             model = task.build_model(cfg.model).half().cuda()
-            model.make_generation_fast_()
+            # model.make_generation_fast_() TODO: hot fix
             return fsdp_wrap(model)
 
         # Load the model

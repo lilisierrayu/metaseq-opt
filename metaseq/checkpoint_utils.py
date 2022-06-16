@@ -468,7 +468,7 @@ def load_model_ensemble_and_task(
             if num_shards == 1:
                 filename = filename.replace(".pt", suffix + ".pt")
             else:
-                filename = orig_filename[:-3] + f"_part{shard_idx}.pt"
+                filename = orig_filename[:-3] + suffix + f"-shard{shard_idx}.pt"
             if state is None:
                 state = load_checkpoint_to_cpu(filename, arg_overrides)
             if "cfg" in state and state["cfg"] is not None:
